@@ -1,18 +1,28 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
+import { FormWithValidationComponent } from './form-with-validation/form-with-validation.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatProgressSpinnerModule, MatSpinner, MatDialog, MatDialogModule} from '@angular/material';
+import { OverlayModule } from '@angular/cdk/overlay';
+import { SpinnerService } from './services/spinner.service';
+import { CountriesService } from './services/countries.service';
 
 @NgModule({
   declarations: [
-    AppComponent
+    FormWithValidationComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    MatProgressSpinnerModule,
+    OverlayModule,
+    MatDialogModule
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [SpinnerService, CountriesService],
+  bootstrap: [FormWithValidationComponent],
+  entryComponents: [MatSpinner]
 })
 export class AppModule { }

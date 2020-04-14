@@ -1,0 +1,46 @@
+<div class="dark-overlay">
+    <h1>form-with-validation</h1>
+
+    <P *ngIf="startDate.invalid && (startDate.dirty || startDate.touched) && startDate.errors.required"> startDate is required </P>
+    <P *ngIf="country.invalid && (country.dirty || country.touched) && country.errors.required"> country is required </P>
+    <P *ngIf="city.invalid && (city.dirty || city.touched) && city.errors.required"> city is required </P>
+
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <label for="startDate"> Start date: </label>
+        <input id="startDate" 
+            formControlName="startDate" 
+            class="form-control" 
+            type="datetime-local">
+        <label for="endDate"> End date: </label>
+        <input id="endDate" 
+            formControlName="endDate" 
+            class="form-control" 
+            type="datetime-local">
+        <label for="country"> Country: </label>
+        <select formControlName="country" 
+            id="country"
+            (change)="onChangeCountry($event.target.value)" 
+            class="select-control">
+            <option *ngFor="let country of countries" 
+                [value]="country.name">
+                {{country.name}}
+            </option>
+        </select>
+        <label for="city"> City: </label>
+        <select formControlName="city" class="select-control" for="city">
+            <option *ngFor="let city of cities" 
+                [value]="city.name">
+                {{city.name}}
+            </option>
+        </select>
+        <button type="submit">
+            Submit
+        </button>
+    </form>
+</div>
+
+<ng-template #dialogRef>
+    <P *ngIf="startDate.invalid && startDate.errors.required"> startDate is required </P>
+    <P *ngIf="country.invalid && country.errors.required"> country is required </P>
+    <P *ngIf="city.invalid && city.errors.required"> city is required </P>
+</ng-template>
